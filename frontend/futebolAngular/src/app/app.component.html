@@ -1,12 +1,26 @@
-<h3>Fab Buttons</h3>
-
-
-<div id="bouding-box">
+<div class="container">
+  <h2>Campo</h2>
+  <div class="example-boundary">
   
-    <button cdkDrag cdkDragBoundary="#bouding-box" class="drag-box" mat-fab color="primary">Jogador</button>
-    <button cdkDrag cdkDragBoundary="#bouding-box" class="drag-box" mat-fab color="primary">Jogador</button>
-    <button cdkDrag cdkDragBoundary="#bouding-box" class="drag-box" mat-fab color="primary">Jogador</button>
-    <button cdkDrag cdkDragBoundary="#bouding-box" class="drag-box" mat-fab color="primary">Jogador</button>
+    <div id="even" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="even" cdkDropListConnectedTo="all"
+      class="example-list2" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
+      <div cdkDragBoundary="example-boundary" class="circleBase type2" *ngFor="let number of even" cdkDrag [cdkDragData]="number">{{number}}</div>
+    </div>
+    <div id="even" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="even" cdkDropListConnectedTo="all"
+      class="example-list2" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
+      <div class="circleBase type2" *ngFor="let number of even" cdkDrag [cdkDragData]="number">{{number}}</div>
+    </div>
+    <div id="even" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="even" cdkDropListConnectedTo="all"
+      class="example-list2" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
+      <div class="circleBase type2" *ngFor="let number of even" cdkDrag [cdkDragData]="number">{{number}}</div>
+    </div>
+  </div>
   
+  <div class="example-container">
+    <h2>Jogadores Disponíveis</h2>
+    <div id="all" cdkDropList [cdkDropListData]="all" cdkDropListConnectedTo="even" class="example-list"
+      (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="noReturnPredicate">
+      <div class="circleBase type2" *ngFor="let number of all" [cdkDragData]="number" cdkDrag>{{number}}</div>
+    </div>
+  </div>
 </div>
-<router-outlet></router-outlet>
