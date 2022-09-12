@@ -1,26 +1,17 @@
+<body>
 <div class="container">
   <h2>Campo</h2>
-  <div class="example-boundary">
-  
-    <div id="even" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="even" cdkDropListConnectedTo="all"
-      class="example-list2" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
-      <div cdkDragBoundary="example-boundary" class="circleBase type2" *ngFor="let number of even" cdkDrag [cdkDragData]="number">{{number}}</div>
-    </div>
-    <div id="even" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="even" cdkDropListConnectedTo="all"
-      class="example-list2" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
-      <div class="circleBase type2" *ngFor="let number of even" cdkDrag [cdkDragData]="number">{{number}}</div>
-    </div>
-    <div id="even" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="even" cdkDropListConnectedTo="all"
-      class="example-list2" (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
-      <div class="circleBase type2" *ngFor="let number of even" cdkDrag [cdkDragData]="number">{{number}}</div>
+  <h4>{{position}}</h4>
+  <div class="example-boundary dropZone" #dropZone cdkDropList id="drop-list" [cdkDropListSortingDisabled]="true" (cdkDropListDropped)="itemDropped($event)">
+    <div *ngFor="let number of even" cdkDrag class="drop-item" [style.top]="number.top" [style.left]="number.left">
+      {{number}}
     </div>
   </div>
-  
-  <div class="example-container">
-    <h2>Jogadores Disponíveis</h2>
-    <div id="all" cdkDropList [cdkDropListData]="all" cdkDropListConnectedTo="even" class="example-list"
-      (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="noReturnPredicate">
-      <div class="circleBase type2" *ngFor="let number of all" [cdkDragData]="number" cdkDrag>{{number}}</div>
-    </div>
+<div class="example-container">
+  <h2>Jogadores Disponíveis</h2>
+  <h2>Objetos</h2>
+  <div id="all" class="example-list">
+    <div  cdkDrag cdkDropList cdkDropListConnectedTo="drop-list" *ngFor="let item of jogadores"
+    [cdkDragData]="item" (cdkDragMoved)="moved($event)" (cdkDragEnded)="teste($event)" class="circleBase type2" cdkDrag>{{item.nome}}</div>
   </div>
 </div>

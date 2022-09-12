@@ -5,11 +5,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './futebol.component.html',
   styleUrls: ['./futebol.component.css']
 })
-export class FutebolComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class FutebolComponent{
 }

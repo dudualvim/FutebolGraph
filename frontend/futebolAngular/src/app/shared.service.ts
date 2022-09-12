@@ -11,20 +11,20 @@ export class SharedService {
   constructor(private http:HttpClient) { }
 
   getJogList():Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/jogadores/');
+    return this.http.get<any[]>(this.APIUrl + '/jogadores');
   }
 
-  addJogador(val: any){
-    return this.http.post(this.APIUrl + '/jogadores/', val);
-  }
+  // addJogador(val: any){
+  //   return this.http.post(this.APIUrl + '/jogadores/', val);
+  // }
 
-  updateJogador(val: any){
-    return this.http.put(this.APIUrl + '/jogadores/', val);
-  }
+  // updateJogador(val: any){
+  //   return this.http.put(this.APIUrl + '/jogadores/', val);
+  // }
 
-  deleteJogador(val: any){
-    return this.http.delete(this.APIUrl + '/jogadores/', val);
-  }
+  // deleteJogador(val: any){
+  //   return this.http.delete(this.APIUrl + '/jogadores/', val);
+  // }
 
 
 }
