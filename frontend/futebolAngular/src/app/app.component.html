@@ -1,17 +1,40 @@
-<body>
-<div class="container">
+
+<div class="container-fluid h-100">
   <h2>Campo</h2>
   <h4>{{position}}</h4>
-  <div class="example-boundary dropZone" #dropZone cdkDropList id="drop-list" [cdkDropListSortingDisabled]="true" (cdkDropListDropped)="itemDropped($event)">
-    <div *ngFor="let number of even" cdkDrag class="drop-item" [style.top]="number.top" [style.left]="number.left">
-      {{number}}
+  <div class="row d-flex ">
+    <div class="col-11">
+      <img id="page-0"
+           class="example-boundary dropZone h-85 w-100 rounded"
+           #dropZone cdkDropList
+           id="drop-list"
+           cdkDropListSortingDisabled="true"
+           (cdkDropListDropped)="itemDropped($event)"
+           [src]="'assets/Images/Campo.png'">
+      <div class="row">
+        <div class="col-12">
+          <h2>Explicação do site</h2>
+        </div>
+      </div>
     </div>
-  </div>
-<div class="example-container">
-  <h2>Jogadores Disponíveis</h2>
-  <h2>Objetos</h2>
-  <div id="all" class="example-list">
-    <div  cdkDrag cdkDropList cdkDropListConnectedTo="drop-list" *ngFor="let item of jogadores"
-    [cdkDragData]="item" (cdkDragMoved)="moved($event)" (cdkDragEnded)="teste($event)" class="circleBase type2" cdkDrag>{{item.nome}}</div>
+    <div class="col-1">
+      <div class="tex">
+        <h2 class="text-center">Jogadores Disponíveis</h2>
+        <div class="d-flex justify-content-center flex-column bg-white rounded w-100">
+          <div
+            style="background-image: url('../assets/Images/jogador{{item.valor}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat"
+            id="div1" cdkDropList cdkDropListConnectedTo="drop-list"
+            *ngFor="let item of jogadores"
+            [cdkDragData]="item" (cdkDragMoved)="moved($event)"
+            class="circleBase type2 m-1 mx-auto" cdkDrag>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center pt-4">
+          <button id="Enviar" class="button" (click)="botaoClicado()">Enviar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
