@@ -1,0 +1,80 @@
+<!--<div class="main-wrapper flex-wrapper">-->
+<!--  <div class="left-column flex-column">-->
+<!--    <div class="sidenav-inner">-->
+<!--      &lt;!&ndash; Origem &ndash;&gt;-->
+
+<!--        <div-->
+<!--             id="div1"-->
+<!--             cdkDrag-->
+<!--             cdkDropList-->
+<!--              cdkDropListConnectedTo="drop-list"-->
+<!--             *ngFor="let type of jogadores"-->
+<!--             [cdkDragData]="type"-->
+<!--             (cdkDragMoved)="moved($event)"-->
+<!--             (cdkDropListDropped)="itemDropped($event)"-->
+<!--             >-->
+<!--            {{type.JogadorNome}}-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="main-area col-11">-->
+<!--    &lt;!&ndash; Destino &ndash;&gt;-->
+<!--      <div class="example-boundary dropZone h-85 w-100 rounded" style="background-image: url('../../assets/Images/Campo.png'); background-repeat: no-repeat; z-index: -1">-->
+<!--        <div-->
+<!--          id="page-0"-->
+<!--          class="document-page dropZone"-->
+<!--          #dropZone-->
+<!--          cdkDropList-->
+<!--          id="drop-list"-->
+<!--          [cdkDropListData]="fields"-->
+<!--          cdkDropListSortingDisabled="true"-->
+<!--          (cdkDropListDropped)="itemDropped($event)">-->
+<!--          <div-->
+<!--               *ngFor="let item of fields"-->
+<!--               cdkDrag-->
+<!--               class="drop-item"-->
+<!--               [style.top]="item.top"-->
+<!--               [style.left]="item.left"-->
+<!--          >-->
+<!--            {{item.JogadorNome}}-->
+<!--          </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="row">
+  <div class="column right">
+    <h2 style="text-align: center">Box2</h2>
+    <div
+      #dropZone
+      class="dropZone"
+      cdkDropList
+      cdkDropListSortingDisabled="true"
+      id="drop-list"
+      (cdkDropListDropped)="itemDropped($event)"
+    >
+      <div
+        *ngFor="let field of fields"
+        style="position: absolute;"
+        [style.top]="field.top"
+        [style.left]="field.left"
+      >
+        {{ field.JogadorNome }}
+      </div>
+    </div>
+  </div>
+  <div class="column left" cdkDropList cdkDropListConnectedTo="drop-list">
+    <div
+      cdkDrag
+      *ngFor="let type of jogadores"
+      [cdkDragData]="type"
+      (cdkDragMoved)="moved($event)"
+      (cdkDropListDropped)="itemDropped($event)"
+    >
+      {{ type.JogadorNome }}
+    </div>
+  </div>
+
+</div>
