@@ -8,18 +8,19 @@ import {
   CdkDragEnd,
   CdkDrag
 } from '@angular/cdk/drag-drop';
+import {SharedService} from "./shared.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements OnInit {
   title = 'Angular';
   position = "";
 
-  botaoClicado() {
+    botaoClicado() {
     const invalido = this.jogadores.some(jogador => {
       return jogador.x < 16 || jogador.x > 1900 || jogador.y < 80 || jogador.y > 890;
     })
@@ -29,13 +30,38 @@ export class AppComponent implements OnInit {
       alert('Grafo Feito!');
     }
   }
-  constructor() {
+
+  constructor(){ }
+
+  JogadorId:string;
+  JogadorNome:string;
+  JogadorForca:string;
+  JogadorX:number;
+  JogadorY:number;
+
+  ngOnInit(): void {
+    this.JogadorId = this.JogadorId;
+    this.JogadorNome = this.JogadorNome;
+    this.JogadorForca = this.JogadorForca;
+    this.JogadorX = this.JogadorX;
+    this.JogadorY = this.JogadorY;
   }
 
-  ngOnInit() {
-  }
+  // panelOpenState = false;
 
-  panelOpenState = false;
+  // botaoClicado() {
+  //   var val = {JogadorId:this.JogadorId,
+  //             JogadorNome:this.JogadorNome,
+  //     JogadorForca:this.JogadorForca,
+  //     JogadorX:this.JogadorX,
+  //     JogadorY:this.JogadorY};
+  //
+  //   this.service.addJogador(val).subscribe(res => {
+  //     alert(res.toString());
+  //   });
+  // }
+  //
+
 
   @ViewChild('dropZone', {read: ElementRef, static: true})
   dropZone: ElementRef;

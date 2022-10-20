@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,19 +11,25 @@ import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import {MatButtonModule} from '@angular/material/button';
+import { JogadorFormComponent } from './jogador-form/jogador-form.component';
+import { TesteFutebolComponent } from './teste-futebol/teste-futebol.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FutebolComponent
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  declarations: [
+    AppComponent,
+    FutebolComponent,
+    JogadorFormComponent,
+    TesteFutebolComponent
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]

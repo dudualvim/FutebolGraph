@@ -1,0 +1,45 @@
+
+<!--<form [formGroup]="jogadorForm" (ngSubmit)="onSubmit()">-->
+<!--  <label for="JogadorNome">Nome: </label>-->
+<!--  <input id="JogadorNome" type="text" formControlName="JogadorNome">-->
+<!--  <br>-->
+<!--  <label for="JogadorForca">Força: </label>-->
+<!--  <input id="JogadorForca" type="number" formControlName="JogadorForca">-->
+<!--  <br>-->
+<!--  <label for="JogadorX">X: </label>-->
+<!--  <input id="JogadorX" type="number" formControlName="JogadorX">-->
+<!--  <br>-->
+<!--  <label for="JogadorY">Y: </label>-->
+<!--  <input id="JogadorY" type="number" formControlName="JogadorY">-->
+<!--  <br>-->
+<!--  <button type="submit">Enviar</button>-->
+<!--</form>-->
+
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Available items</h2>
+ <!-- Lista de Origem -->
+    <div
+      cdkDropList
+      [cdkDropListData]="items"
+      class="example-list"
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of items" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Shopping basket</h2>
+<!-- Lista de Destino-->
+    <div
+      cdkDropList
+      [cdkDropListData]="basket"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of basket" cdkDrag>{{item.JogadorNome}}</div>
+    </div>
+
+      <button type="submit" (click)="Submit()">Enviar</button>
+  </div>
+</div>

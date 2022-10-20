@@ -1,0 +1,129 @@
+
+* {
+  background-color: #90ee90;
+
+}
+
+.button{
+  border-color: aqua;
+  border-radius: 5px;
+  height:  80px;
+  width: 210px;
+  color: black;
+  background: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+h2, h4 {
+  color: black;
+}
+
+.container{
+  width: 100%;
+  flex: 1;
+}
+
+.example-container {
+  width: 70px;
+  max-width: 80%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.example-list {
+  border: solid 1px #ccc;
+  min-height: 70px;
+  background: black;
+  border-radius: 4px;
+  display: block;
+  align-items: center;
+}
+
+.type2 {
+  width: 75px;
+  height: 75px;
+  background: white;
+  border: solid 1px #ccc;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 14px;
+  border-radius: 50%;
+}
+
+.example-boundary {
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  position:relative;
+   border: dotted #ccc 2px;
+   background-color: #00E676;
+  margin: 0 10px 10px 0;
+  display: inline-block;
+  vertical-align: top;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+.drop-item {
+  position: absolute;
+  display: inline;
+}
+
+.sidenav-inner {
+  padding: 20px;
+}
+
+.flex-wrapper {
+  display: flex;
+}
+
+.main-area {
+  width: 100%;
+  flex: 1;
+}
+
+.dropZone {
+  border:1px solid black;
+  position:relative;
+  width: 70%;
+  height: 700px;
+  overflow: show;
+  display: inline-block;
+  background-image: url('../../assets/Images/Campo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.drop-item {
+  position: absolute;
+  display: inline-block;
+}
+
+.h-85{
+  height: 85% !important;
+}
+
+
+@media (max-width: 480px){
+  .container{
+    position: fixed;
+    width: 100%;
+  }
+  .example-container{
+    position: fixed;
+    width: 100%;
+  }
+}
+
