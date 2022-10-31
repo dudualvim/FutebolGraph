@@ -13,6 +13,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import {MatButtonModule} from '@angular/material/button';
 import { JogadorFormComponent } from './jogador-form/jogador-form.component';
 import { TesteFutebolComponent } from './teste-futebol/teste-futebol.component';
+import { HomeComponent } from './home/home.component';
+import { DevComponent } from './dev/dev.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { TesteFutebolComponent } from './teste-futebol/teste-futebol.component';
     AppComponent,
     FutebolComponent,
     JogadorFormComponent,
-    TesteFutebolComponent
+    TesteFutebolComponent,
+    HomeComponent,
+    DevComponent
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]

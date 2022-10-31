@@ -13,17 +13,17 @@ export class FutebolComponent implements OnInit{
   arrayJogadores: any[] = [];
 
   jogadores = [
-    {"JogadorId": 1, "JogadorNome": 'Teste',"JogadorForca": 0, "JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 2, "JogadorNome": 'Roger', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 3, "JogadorNome": 'Eduardo', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 4, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 5, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 6, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 7, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 8, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 9, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 10, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 11, "JogadorNome": 'R10', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 1, "JogadorNome": 'Alisson',"JogadorForca": 0, "JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 2, "JogadorNome": 'Danilo', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 3, "JogadorNome": 'Thiago Silva', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 4, "JogadorNome": 'Marquinhos', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 5, "JogadorNome": 'Casemiro', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 6, "JogadorNome": 'Alexandro', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 7, "JogadorNome": 'Raphinha', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 8, "JogadorNome": 'Paquetá', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 9, "JogadorNome": 'Richarlison', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 10, "JogadorNome": 'Neymar', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 11, "JogadorNome": 'Vini Jr', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
   ];
 
   keys = ['JogadorNome', 'JogadorForca', 'JogadorX', 'JogadorY'];

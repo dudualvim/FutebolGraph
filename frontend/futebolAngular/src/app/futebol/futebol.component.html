@@ -1,48 +1,60 @@
-<div class="container-fluid">
-  <h2>Campo</h2>
-  <h4>{{position}}</h4>
+<div class="container-fluid ">
   <!-- Campo de Futebol (Destino) -->
-  <div class="row">
-    <div class="dropZone rounded"
-         #dropZone
-         cdkDropList
-         cdkDropListSortingDisabled="true"
-         id="drop-list"
-         (cdkDropListDropped)="itemDropped($event)">
-      <div
-        *ngFor="let field of arrayJogadores"
-        style="position: absolute;"
-        [style.top]="field.top"
-        [style.left]="field.left"
-        style="background-image: url('../../assets/Images/jogador{{field.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
-        class="type2"
-      >
-        {{ field.JogadorId }}
+  <div class="row d-flex">
+    <div class="col-11">
+      <h2 class="text-center">Campo</h2>
+      <h4 class="text-center">{{position}}</h4>
+      <div class="example-boundary dropZone h-85 w-100 rounded"
+           #dropZone
+           cdkDropList
+           [cdkDropListConnectedTo]="lista"
+           #campo="cdkDropList"
+           id="drop-list"
+           (cdkDropListDropped)="itemDropped($event)">
+        <div
+          *ngFor="let field of arrayJogadores"
+          style="position: absolute;"
+          [style.top]="field.top"
+          [style.left]="field.left"
+          style="background-image: url('../../assets/Images/jogador{{field.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
+          class="type2"
+        >
+          {{ field.JogadorId }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <div class="px-5">
+            <button class="button" routerLink="">Voltar</button>
+          </div>
+          <div class="px-5">
+            <button id="Enviar" class="button" (click)="Submit()">Enviar</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-1">
       <div>
         <!-- Lista de Jogadores (Origem) -->
         <h2 class="text-center">Jogadores Disponíveis</h2>
-        <div class="bg-white rounded" cdkDropList cdkDropListConnectedTo="drop-list">
+        <div class="d-flex justify-content-center flex-column bg-white rounded w-100">
           <div
-            cdkDrag
-            *ngFor="let item of jogadores"
-            [cdkDragData]="item"
-            (cdkDragMoved)="moved($event)"
-            (cdkDropListDropped)="itemDropped($event)"
-            style="background-image: url('../../assets/Images/jogador{{item.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
-            class="circleBase type2 m-1 mx-auto">
-            {{item.JogadorNome}}
+            cdkDropList
+            #lista="cdkDropList"
+            [cdkDropListConnectedTo]="campo">
+            <div
+              cdkDrag
+              *ngFor="let item of jogadores"
+              [cdkDragData]="item"
+              (cdkDragMoved)="moved($event)"
+              (cdkDropListDropped)="itemDropped($event)"
+              style="background-image: url('../../assets/Images/jogador{{item.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
+              class="circleBase type2 m-1 mx-auto">
+              {{item.JogadorNome}}
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 d-flex justify-content-center pt-4">
-          <button id="Enviar" class="button" (click)="Submit()">Enviar</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
