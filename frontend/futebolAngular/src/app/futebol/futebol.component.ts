@@ -23,7 +23,7 @@ export class FutebolComponent implements OnInit{
     {"JogadorId": 8, "JogadorNome": 'Paquetá', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
     {"JogadorId": 9, "JogadorNome": 'Richarlison', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
     {"JogadorId": 10, "JogadorNome": 'Neymar', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 11, "JogadorNome": 'Vini Jr', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 11, "JogadorNome": 'Vini Jr.', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
   ];
 
   keys = ['JogadorNome', 'JogadorForca', 'JogadorX', 'JogadorY'];
@@ -37,14 +37,57 @@ export class FutebolComponent implements OnInit{
     (botão de enviar)
   */
   Submit() {
-    const redux = array => array.map(o => this.keys.reduce((acc, curr) => {
-      acc[curr] = o[curr];
-      return acc;
-    }, {}));
-
-    this.service.addJogador(redux(this.arrayJogadores)).subscribe(res => {
-      alert(res.toString());
+    this.service.addJogador((this.arrayJogadores)).subscribe(res => {
+      let t1 = res.toString();
+      document.getElementById("resultDiv").innerHTML = t1;
+      this.desenharAresta(t1);
     });
+  }
+
+  desenharAresta(t1: string) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg' ,'svg');
+    svg.setAttribute('width', '1470');
+    svg.setAttribute('height', '800');
+
+    var matches;
+
+    var pattern = /\[(.*?)\]/g;
+    var match;
+    while ((match = pattern.exec(t1)) != null)
+    {
+      matches = match[1];
+    }
+
+    let index = matches.indexOf(',');
+    let p1 = matches.substring(0, index);
+    let p2 = matches.substring(index+1);
+
+    console.log(p1);
+    console.log(p2);
+
+    for (let i = 0; i < 11; i++) {
+      for (let j = 0; j < 10; j++) {
+        if(this.jogadores[i]['JogadorNome'] === p1 && this.jogadores[j]['JogadorNome'] === p2){
+          const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
+          line.setAttribute('x1', this.arrayJogadores[i]['JogadorX']); // X inicial
+          line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
+          line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
+          line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
+          line.setAttribute('style', 'stroke:rgb(255,0,0); stroke-width:2');
+          svg.appendChild(line);
+          document.getElementById('drop-list').appendChild(svg);
+        } else {
+          const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
+          line.setAttribute('x1', this.arrayJogadores[i]['JogadorX']); // X inicial
+          line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
+          line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
+          line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
+          line.setAttribute('style', 'stroke:rgb(0,0,0); stroke-width:2');
+          svg.appendChild(line);
+          document.getElementById('drop-list').appendChild(svg);
+        }
+      }
+    }
   }
 
   @ViewChild('dropZone', {read: ElementRef, static: true})

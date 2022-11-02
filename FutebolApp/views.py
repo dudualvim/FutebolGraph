@@ -1,5 +1,5 @@
 import math
-import networkx as nx
+import pandas as pd
 import matplotlib.pyplot as plt
 import networkx.algorithms.approximation as nx_app
 
@@ -19,28 +19,14 @@ def futebolApi(request):
     if request.method == 'GET':
         jogadores = Jogadores.objects.all()
         jogadores_serializer = JogadoresSerializer(jogadores, many=True)
-        print(jogadores_serializer.data[1]['JogadorX'])
-        print(jogadores_serializer.data[1]['JogadorY'])
-        g = Grafo(11)
-        j = 1
-        for i in range(0, 10):
-            x = [jogadores_serializer.data[i]['JogadorX'], jogadores_serializer.data[i]['JogadorY']]
-            y = [jogadores_serializer.data[j]['JogadorX'], jogadores_serializer.data[j]['JogadorY']]
-            g.adiciona_aresta(jogadores_serializer.data[i]['JogadorId'], jogadores_serializer.data[j]['JogadorId'], int(math.dist(x, y)))
-            print(f'{jogadores_serializer.data[i]["JogadorId"]} -> {jogadores_serializer.data[j]["JogadorId"]}: {math.dist(x, y):.2f}.')
-            j += 1
-
-        g.mostra_matriz()
-        resultado = g.dijkstra(0)
-        print(resultado)
-        return JsonResponse(jogadores_serializer.data, safe=False)
+        return JsonResponse(str(jogadores_serializer.data), safe=False)
     elif request.method == 'POST':
         jogadores_data = JSONParser().parse(request)
-        jogadores_serializer = JogadoresSerializer(data = jogadores_data, many=True)
+        jogadores_serializer = JogadoresSerializer(data=jogadores_data, many=True)
         if jogadores_serializer.is_valid():
             jogadores_serializer.save()
-            return JsonResponse("Adicionado com sucesso!", safe=False)
-        return JsonResponse("Falha ao salvar um novo jogador", safe=False)
+            return JsonResponse(dijkstra(jogadores_serializer), safe=False)
+        return JsonResponse(str(jogadores_serializer.errors), safe=False)
     elif request.method == 'PUT':
         jogadores_data = JSONParser().parse(request)
         jogadores = Jogadores.objects.get(JogadorId=jogadores_data['JogadorId'])
@@ -56,3 +42,44 @@ def futebolApi(request):
         jogadores.delete()
         return JsonResponse("Deletado com sucesso", safe=False)
 
+def printItems(dictObj, indent):
+    print('  '*indent + '<ul>')
+    for k,v in dictObj.items():
+        if isinstance(v, dict):
+            print( '  '*indent , '<li>', k, ':', '</li>')
+            printItems(v, indent+1)
+        else:
+            print( ' '*indent , '<li>', k, ':', v, '</li>')
+    print( '  '*indent + '</ul>')
+
+def printDict(dictObj):
+    my_list = []
+    i = 0
+    for vert, adj in dictObj.items():
+      my_list.insert(0, f'{vert} {adj} <br>')
+      i += 1
+    return my_list
+def dijkstra(jogadores_serializer):
+    g = {}
+    gr = Grafo()
+    i = 0
+    j = 1
+    for i in range(11):
+        for j in range(10):
+            if jogadores_serializer.data[i] != jogadores_serializer.data[j]:
+                x = [jogadores_serializer.data[i]['JogadorX'], jogadores_serializer.data[i]['JogadorY']]
+                y = [jogadores_serializer.data[j]['JogadorX'], jogadores_serializer.data[j]['JogadorY']]
+                gr.addEdge(g, jogadores_serializer.data[i]['JogadorNome'], jogadores_serializer.data[j]['JogadorNome'],
+                                  int(math.dist(x, y)), jogadores_serializer.data[i]['JogadorForca'])
+
+    # Mostra a matriz de distâncias no terminal
+    df = pd.DataFrame(g)
+    df.fillna(0, inplace=True)
+
+    # Mostra a matriz como uma tabela HTML
+    html = df.to_html()
+
+    source = 'Alisson'
+    destination = 'Neymar'
+    resultado = gr.dijsktra(g, source, destination)
+    return html, printDict(g), resultado

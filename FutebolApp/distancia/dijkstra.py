@@ -1,106 +1,76 @@
-import math
-
-class HeapMin:
-    def __init__(self):
-        self.nos = 0
-        self.heap = []
-
-    # u = peso, indice = qual vert. está relacionado com o peso
-    def adiciona_no(self, u, indice):
-        self.heap.append([u, indice])
-        self.nos += 1
-        f = self.nos
-
-        while True:
-            if f == 1:
-                break
-            p = f // 2
-            if self.heap[p-1][0] <= self.heap[f-1][0]:
-                break
-            else:
-                self.heap[p-1], self.heap[f-1] = self.heap[f-1], self.heap[p-1]
-                f = p
-
-    def mostra_heap(self):
-        print('Estrutura Heap: ')
-        nivel = int(math.log(self.nos, 2))
-        a = 0
-        for i in range(nivel):
-            for j in range(2 ** i):
-                print(f'{self.heap[a]}',end= ' ')
-                a += 1
-            print('')
-        for i in range(self.nos - a):
-            print(f'{self.heap[a]}', end= ' ')
-            a += 1
-        print('')
-
-    def remove_no(self):
-        x = self.heap[0]
-        self.heap[0] = self.heap[self.nos - 1]
-        self.heap.pop()
-        self.nos -= 1
-        p = 1
-        while True:
-            f = 2 * p
-            if f > self.nos:
-                break
-            if f + 1 <= self.nos:
-                if self.heap[f][0] < self.heap[f-1][0]:
-                    f += 1
-            if self.heap[p-1][0] <= self.heap[f-1][0]:
-                break
-            else:
-                self.heap[p-1], self.heap[f-1] = self.heap[f-1], self.heap[p-1]
-                p = f
-        return x
-
-    def tamanho(self):
-        return self.nos
+import sys
+from heapq import heapify, heappush
+from random import randint
 
 class Grafo:
-    def __init__(self, vertices):
-        self.vertices = vertices
-        self.grafo = [[0] * self.vertices for i in range(self.vertices)]
+    def dijsktra(self, grafo, origem, dest):
+        inf = sys.maxsize
+        grafo_aux = {'Alisson': {'custo': inf, 'pred': [], 'forca': randint(50, 500)}, # Custo = Distância
+                     'Danilo': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Thiago Silva': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Marquinhos': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Casemiro': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Alexandro': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Raphinha': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Paquetá': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Richarlison': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Neymar': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
+                     'Vini Jr.': {'custo': inf, 'pred': [], 'forca': randint(50, 500)}
+                     }
+        grafo_aux[origem]['custo'] = 0
+        visitado = []
+        temp = origem
+        for i in range(10):
+            if temp not in visitado:
+                visitado.append(temp)
+                min_heap = []
+                for j in grafo[temp]:
+                    if j not in visitado:
+                        custo = grafo_aux[temp]['custo'] + grafo[temp][j]
+                        if custo < grafo_aux[j]['custo']:
+                            grafo_aux[j]['custo'] = custo
+                            grafo_aux[j]['pred'] = grafo_aux[temp]['pred'] + [temp]
+                        heappush(min_heap, (grafo_aux[j]['custo'], j))
+            heapify(min_heap)
+            temp = min_heap[0][1]
+        return ("Menor Caminho: " + str(grafo_aux[dest]['pred'] + [dest])), ("Menor distância: " + str(grafo_aux[dest]['custo']))
 
-    def adiciona_aresta(self, u, v, peso):
-        self.grafo[u-1][v-1] = peso
-        self.grafo[v-1][u-1] = peso
+    # Função que insere uma nova aresta no grafo
+    def addEdge(self, grafo, key, vert, dist, forca):
+        if key not in grafo:
+            grafo[key] = {}
+        if vert not in grafo:
+            grafo[vert] = {}
 
-    def mostra_matriz(self):
-        print("Matriz de adjacências: ")
-        for i in range(self.vertices):
-            print(self.grafo[i])
-
-    def dijkstra(self, origem):
-        custo_vem = [[-1, 0] for i in range(self.vertices)]
-        custo_vem[origem - 1] = [0, origem]
-        h = HeapMin()
-        h.adiciona_no(0, origem)
-        while h.tamanho() > 0:
-            dist, v = h.remove_no()
-            for i in range(self.vertices):
-                if self.grafo[v-1][i] != 0:
-                    if custo_vem[i][0] == -1 or custo_vem[i][0] > dist + self.grafo[v-1][i]:
-                        custo_vem[i] = [dist + self.grafo[v-1][i], v]
-                        h.adiciona_no(dist + self.grafo[v-1][i], i)
-        return custo_vem
-
-
-# g = Grafo(7)
+        grafo[key][vert] = dist
+        grafo[vert][key] = dist
 #
-# g.adiciona_aresta(1, 2, 5)
-# g.adiciona_aresta(1, 3, 6)
-# g.adiciona_aresta(1, 4, 10)
-# g.adiciona_aresta(2, 5, 13)
-# g.adiciona_aresta(3, 4, 3)
-# g.adiciona_aresta(3, 5, 11)
-# g.adiciona_aresta(3, 6, 6)
-# g.adiciona_aresta(4, 5, 6)
-# g.adiciona_aresta(4, 6, 4)
-# g.adiciona_aresta(5, 7, 3)
-# g.adiciona_aresta(6, 7, 8)
 #
-# g.mostra_matriz()
+# Jogadores = ['Alisson', 'Thiago Silva', 'Marquinhos', 'Danilo', 'Militão',
+#              'Coutinho', 'Paquetá', 'B. Guimarães', 'Richarlison', 'Vini Jr.', 'Neymar']
 #
-# g.dijkstra(1)
+# g = {}
+# gr = Grafo()
+# # Preenche automaticamente o grafo
+# for i in range(11):
+#     for j in range(10):
+#         if Jogadores[i] != Jogadores[j]:
+#             gr.addEdge(g, Jogadores[i], Jogadores[j], randint(0, 100))
+#
+# # Mostra a lista de adjacências no terminal
+# print('Lista de Adjacências')
+# for vert, adj in g.items():
+#     print(f'{vert} {adj}')
+#
+# # Mostra a matriz de distâncias no terminal
+# df = pd.DataFrame(g)
+# df.fillna(0, inplace=True)
+# print(df.iloc[::-1])
+#
+# # Mostra a matriz como uma tabela HTML
+# html = df.to_html()
+# print(html)
+#
+# source = 'Alisson'
+# destination = 'Neymar'
+# gr.dijsktra(g, source, destination)
