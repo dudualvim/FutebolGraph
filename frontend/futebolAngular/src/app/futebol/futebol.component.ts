@@ -8,7 +8,7 @@ import { SharedService } from "../shared.service";
   styleUrls: ['./futebol.component.css']
 })
 export class FutebolComponent implements OnInit{
-  position = "";
+  position = "Posição do Jogador Selecionado";
 
   arrayJogadores: any[] = [];
 
@@ -135,6 +135,7 @@ export class FutebolComponent implements OnInit{
         this.dropZone.nativeElement.getBoundingClientRect().left +
         'px';
       this.addField({ ...event.item.data }, event.currentIndex);
+      this.jogadores = this.jogadores.filter(jogador => jogador.JogadorId != event.item.data.JogadorId)
     }
     // console.warn(this.arrayJogadores);
   }

@@ -1,13 +1,12 @@
 
 * {
   background-color: #90ee90;
-
 }
 
-.button{
+.button {
   border-color: aqua;
   border-radius: 5px;
-  height:  80px;
+  height: 80px;
   width: 250px;
   color: black;
   background: white;
@@ -23,7 +22,7 @@ h2, h4 {
   color: black;
 }
 
-.container{
+.container {
   width: 100%;
   flex: 1;
 }
@@ -60,14 +59,14 @@ h2, h4 {
   border-radius: 50%;
 }
 
+.cdk-drag-placeholder {
+  display: none;
+}
+
 .example-boundary {
-  width: 200px;
-  height: 200px;
-  max-width: 100%;
-  max-height: 100%;
-  position:relative;
-   border: dotted #ccc 2px;
-   background-color: #00E676;
+  position: relative;
+  border: dotted #ccc 2px;
+  background-color: #00E676;
   margin: 0 10px 10px 0;
   display: inline-block;
   vertical-align: top;
@@ -95,8 +94,8 @@ h2, h4 {
 }
 
 .dropZone {
-  border:1px solid black;
-  position:relative;
+  border: 1px solid black;
+  position: relative;
   width: 70%;
   height: 700px;
   overflow: show;
@@ -111,17 +110,18 @@ h2, h4 {
   display: inline-block;
 }
 
-.h-85{
+.h-85 {
   height: 85% !important;
 }
 
 
-@media (max-width: 480px){
-  .container{
+@media (max-width: 480px) {
+  .container {
     position: fixed;
     width: 100%;
   }
-  .example-container{
+
+  .example-container {
     position: fixed;
     width: 100%;
   }
