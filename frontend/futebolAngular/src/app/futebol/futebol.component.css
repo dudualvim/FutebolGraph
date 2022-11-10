@@ -1,13 +1,14 @@
 
 * {
+   /*background-image: url('../../assets/Images/back3.jpg');*/
   background-color: #90ee90;
 }
 
 .button {
   border-color: white;
   border-radius: 5px;
-  height: 80px;
-  width: 250px;
+  height: 70px;
+  width: 140px;
   color: black;
   background: aqua;
   align-items: center;
@@ -33,6 +34,7 @@ h2, h4 {
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
+
 }
 
 .example-list {
@@ -45,9 +47,9 @@ h2, h4 {
 }
 
 .type2 {
-  width: 75px;
-  height: 75px;
-  background: white;
+  width: 77px;
+  height: 77px;
+  background: black;
   border: solid 1px #ccc;
   overflow: hidden;
   display: flex;
@@ -57,6 +59,7 @@ h2, h4 {
   cursor: move;
   font-size: 14px;
   border-radius: 50%;
+
 }
 
 .cdk-drag-placeholder {
@@ -65,8 +68,6 @@ h2, h4 {
 
 .example-boundary {
   position: relative;
-  border: dotted #ccc 2px;
-  background-color: #00E676;
   margin: 0 10px 10px 0;
   display: inline-block;
   vertical-align: top;
@@ -75,26 +76,12 @@ h2, h4 {
 
 }
 
-.drop-item {
-  position: absolute;
-  display: inline;
-}
-
-.sidenav-inner {
-  padding: 20px;
-}
-
-.flex-wrapper {
-  display: flex;
-}
-
 .main-area {
   width: 100%;
   flex: 1;
 }
 
 .dropZone {
-  border: 1px solid black;
   position: relative;
   width: 70%;
   height: 700px;
@@ -102,8 +89,17 @@ h2, h4 {
   display: inline-block;
   background-image: url('../../assets/Images/Campo.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 1090px;
 }
+
+.teste{
+  height: 800px;
+}
+
+.teste2{
+  height: 750px; width: 280px;
+}
+
 
 .drop-item {
   position: absolute;

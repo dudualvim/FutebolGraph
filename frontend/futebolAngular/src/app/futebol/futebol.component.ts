@@ -28,7 +28,11 @@ export class FutebolComponent implements OnInit{
 
   keys = ['JogadorNome', 'JogadorForca', 'JogadorX', 'JogadorY'];
 
-  constructor(private service: SharedService){ }
+  title = 'mouse-hover';
+  showImage: boolean;
+  constructor(private service: SharedService){
+    this.showImage = false;
+  }
 
   ngOnInit(): void { }
 
@@ -146,5 +150,8 @@ export class FutebolComponent implements OnInit{
   addField(fieldType: object, index: number) {
     this.arrayJogadores.splice(index, 0, fieldType);
   }
+
+
+
 }
 
