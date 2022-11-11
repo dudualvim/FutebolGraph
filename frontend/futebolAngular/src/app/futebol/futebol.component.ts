@@ -151,7 +151,19 @@ export class FutebolComponent implements OnInit{
     this.arrayJogadores.splice(index, 0, fieldType);
   }
 
+  /*
+    Função responsável por mostrar as informações dos jogadores para o usuário de acordo com o mouse.
+  */
 
+  jogadorSelecionado = null;
+  MostrarJogador(item){
+    this.jogadorSelecionado = item;
+    console.log(this.jogadorSelecionado);
+  }
+
+  NaoMostrarJogador(){
+    this.jogadorSelecionado = null;
+  }
 
 }
 

@@ -63,11 +63,11 @@ h2, h4 {
 }
 
 .cdk-drag-placeholder {
-  display: none;
+  display: table-column;
 }
 
 .example-boundary {
-  position: relative;
+  position: absolute;
   margin: 0 10px 10px 0;
   display: inline-block;
   vertical-align: top;
@@ -82,11 +82,11 @@ h2, h4 {
 }
 
 .dropZone {
-  position: relative;
+  position: absolute;
   width: 70%;
   height: 700px;
   overflow: show;
-  display: inline-block;
+  display: inline-list-item;
   background-image: url('../../assets/Images/Campo.png');
   background-repeat: no-repeat;
   background-size: 1090px;
