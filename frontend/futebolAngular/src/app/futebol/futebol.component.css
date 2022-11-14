@@ -1,7 +1,8 @@
 
 * {
-   /*background-image: url('../../assets/Images/back3.jpg');*/
-  background-color: #90ee90;
+    background-image: linear-gradient( 180deg, #009a74, #012b26);
+    background-attachment: fixed;
+    color: white;
 }
 
 .button {

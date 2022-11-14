@@ -13,17 +13,17 @@ export class FutebolComponent implements OnInit{
   arrayJogadores: any[] = [];
 
   jogadores = [
-    {"JogadorId": 1, "JogadorNome": 'Alisson',"JogadorForca": 0, "JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 2, "JogadorNome": 'Danilo', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 3, "JogadorNome": 'Thiago Silva', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 4, "JogadorNome": 'Marquinhos', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 5, "JogadorNome": 'Casemiro', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 6, "JogadorNome": 'Alexandro', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 7, "JogadorNome": 'Raphinha', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 8, "JogadorNome": 'Paquetá', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 9, "JogadorNome": 'Richarlison', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 10, "JogadorNome": 'Neymar', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 11, "JogadorNome": 'Vini Jr.', "JogadorForca": 0,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 1, "JogadorNome": 'Alisson',"JogadorForca": this.randomIntFromInterval(300,700), "JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 2, "JogadorNome": 'Danilo', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 3, "JogadorNome": 'Thiago Silva', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 4, "JogadorNome": 'Marquinhos', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 5, "JogadorNome": 'Casemiro', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 6, "JogadorNome": 'Alexandro', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 7, "JogadorNome": 'Raphinha', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 8, "JogadorNome": 'Paquetá', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 9, "JogadorNome": 'Richarlison', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 10, "JogadorNome": 'Neymar', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 11, "JogadorNome": 'Vini Jr.', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
   ];
 
   keys = ['JogadorNome', 'JogadorForca', 'JogadorX', 'JogadorY'];
@@ -35,6 +35,10 @@ export class FutebolComponent implements OnInit{
   }
 
   ngOnInit(): void { }
+
+  randomIntFromInterval(min: number, max: number) { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
   /*
     Função responsável por realizar uma requisição POST
@@ -57,8 +61,7 @@ export class FutebolComponent implements OnInit{
 
     var pattern = /\[(.*?)\]/g;
     var match;
-    while ((match = pattern.exec(t1)) != null)
-    {
+    while ((match = pattern.exec(t1)) != null){
       matches = match[1];
     }
 
@@ -71,25 +74,14 @@ export class FutebolComponent implements OnInit{
 
     for (let i = 0; i < 11; i++) {
       for (let j = 0; j < 10; j++) {
-        if(this.jogadores[i]['JogadorNome'] === p1 && this.jogadores[j]['JogadorNome'] === p2){
-          const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
-          line.setAttribute('x1', this.arrayJogadores[i]['JogadorX']); // X inicial
-          line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
-          line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
-          line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
-          line.setAttribute('style', 'stroke:rgb(255,0,0); stroke-width:2');
-          svg.appendChild(line);
-          document.getElementById('drop-list').appendChild(svg);
-        } else {
-          const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
-          line.setAttribute('x1', this.arrayJogadores[i]['JogadorX']); // X inicial
-          line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
-          line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
-          line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
-          line.setAttribute('style', 'stroke:rgb(0,0,0); stroke-width:2');
-          svg.appendChild(line);
-          document.getElementById('drop-list').appendChild(svg);
-        }
+        const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
+        line.setAttribute('x1', this.arrayJogadores[i]['JogadorX']); // X inicial
+        line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
+        line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
+        line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
+        line.setAttribute('style', 'stroke:rgb(255,0,0); stroke-width:2');
+        svg.appendChild(line);
+        document.getElementById('drop-list').appendChild(svg);
       }
     }
   }

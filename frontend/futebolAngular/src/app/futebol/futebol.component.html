@@ -29,7 +29,7 @@
         <div class="col justify-content-md-center align-items-md-center h-25 pt-4">
           <div class="rounded teste2">
             <h1 class="pt-5 " style="font-size: 30px">Detalhes do Jogador</h1>
-            <h4 style="font-size: 13px">Passe o Mouse em cima do jogador que desejar para mostrar os detalhes
+             <h4 style="font-size: 13px">Passe o Mouse em cima do jogador que desejar para mostrar os detalhes
               dele: </h4>
             <img
               *ngIf="jogadorSelecionado"
@@ -77,3 +77,96 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body " id="resultDiv">
+        <h5 class="card-title">Dijkstra</h5>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body" id="resultDiv1">
+        <h5 class="card-title">Lista de Adjacências</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Matriz de Distâncias</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="container-fluid h-100">
+   Campo de Futebol (Destino)
+  <div class="row d-flex h-100">
+    <div class="col-11">
+      <h2 class="text-center">Campo</h2>
+      <h4 class="text-center">{{position}}</h4>
+      <div class="example-boundary dropZone h-85 w-100 rounded"
+           #dropZone
+           cdkDropList
+           [cdkDropListConnectedTo]="lista"
+           #campo="cdkDropList"
+           id="drop-list"
+           (cdkDropListDropped)="itemDropped($event)"
+      >
+        <div
+          *ngFor="let field of arrayJogadores"
+          style="position: absolute;"
+          [style.top]="field.top"
+          [style.left]="field.left"
+          style="background-image: url('../../assets/Images/jogador{{field.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
+          class="type2"
+        >
+          {{ field.JogadorId }}
+        </div>
+      </div>
+    </div>
+    <div class="col-1">
+      <div>
+         Lista de Jogadores (Origem)
+        <h2 class="text-center">Jogadores Disponíveis</h2>
+        <div class="d-flex justify-content-center flex-column rounded w-100 py-2">
+          <div
+            cdkDropList
+            #lista="cdkDropList"
+            [cdkDropListConnectedTo]="campo">
+            <div
+              cdkDrag
+              *ngFor="let item of jogadores"
+              [cdkDragData]="item"
+              (cdkDragMoved)="moved($event)"
+              (cdkDropListDropped)="itemDropped($event)"
+              style="background-image: url('../../assets/Images/jogador{{item.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
+              class="circleBase type2 m-1 mx-auto">
+              {{item.JogadorNome}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11 d-flex justify-content-center">
+      <div class="px-5">
+        <button class="button" routerLink="">Voltar</button>
+      </div>
+      <div class="px-5">
+        <button id="Enviar" class="button" (click)="Submit()">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->

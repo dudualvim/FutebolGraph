@@ -1,6 +1,9 @@
 * {
-  background-color: #90ee90;
+    background-image: url('../../assets/Images/tes.gif');
+    background-size: cover;
+    background-attachment: fixed;
 }
+
 .button{
   border-color: white;
   border-radius: 5px;
