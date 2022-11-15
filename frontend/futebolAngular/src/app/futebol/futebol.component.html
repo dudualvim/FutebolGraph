@@ -1,8 +1,8 @@
-<div class="container-fluid h-100">
+<div class="container-fluid h-100 w-100">
   <!-- Campo de Futebol (Destino) -->
   <div class="col d-flex  teste">
     <div class="col-10">
-      <h2 class="text-center">Campo</h2>
+      <h2 class="text-center" style="margin-right: 14px">Campo</h2>
       <h4 class="text-center">{{position}}</h4>
       <div class="example-boundary dropZone h-78 w-100 rounded"
            #dropZone
@@ -26,20 +26,17 @@
     </div>
     <div class="col-2">
       <div>
-        <div class="col justify-content-md-center align-items-md-center h-25 pt-4">
-          <div class="rounded teste2">
-            <h1 class="pt-5 " style="font-size: 30px">Detalhes do Jogador</h1>
-             <h4 style="font-size: 13px">Passe o Mouse em cima do jogador que desejar para mostrar os detalhes
-              dele: </h4>
+        <div class="col pt-4">
+          <div class="teste2">
             <img
               *ngIf="jogadorSelecionado"
-              [src]="'assets/Images/jogador' + jogadorSelecionado.JogadorId + '.jpg'"
-              style="border-radius: 3px"
+              [src]="'assets/Images/DetalhesJogador' + jogadorSelecionado.JogadorId + '.jpg'"
+              class="imagemDetalhes"
             >
           </div>
         </div>
       </div>
-        <div class=" d-flex justify-content-center pt-4">
+        <div class=" d-flex justify-content-center pt-4" style="margin-right: 60px">
           <div class="px-3">
             <button  class="button" routerLink="">Voltar</button>
           </div>
@@ -50,15 +47,17 @@
     </div>
   </div>
   <div>
-    <div class="col-10 w-100 h-100">
+    <div class="col-9">
       <!-- Lista de Jogadores (Origem) -->
-      <h2 class="text-center">Jogadores Disponíveis</h2>
-      <div class="row d-flex justify-content-center flex-row rounded py-1">
+      <h2 class="text-center" style="margin-left: 160px">Jogadores Disponíveis</h2>
+      <div class="row d-flex justify-content-center flex-row rounded py-1" style="margin-left: 155px"   >
         <div
           class="row-10 d-flex justify-content-center flex-row rounded"
           cdkDropList
           #lista="cdkDropList"
-          [cdkDropListConnectedTo]="campo">
+          [cdkDropListConnectedTo]="campo"
+          style="margin-right: 10px; justify-content: center;"
+        >
           <div
             cdkDrag
             *ngFor="let item of jogadores"
@@ -66,8 +65,7 @@
             (cdkDragMoved)="moved($event)"
             (cdkDropListDropped)="itemDropped($event)"
             (mouseover)="MostrarJogador(item)"
-            (mouseout)="NaoMostrarJogador()"
-            style="background-image: url('../../assets/Images/jogador{{item.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"
+            style="background-image: url('../../assets/Images/jogador{{item.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat; "
             class="circleBase type2 m-1 mx-auto"
           >
             {{item.JogadorNome}}
@@ -77,7 +75,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row pt-lg-5 ">
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body " id="resultDiv">
@@ -87,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-5">
     <div class="card">
       <div class="card-body" id="resultDiv1">
         <h5 class="card-title">Lista de Adjacências</h5>
@@ -96,7 +94,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-6 ">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Matriz de Distâncias</h5>

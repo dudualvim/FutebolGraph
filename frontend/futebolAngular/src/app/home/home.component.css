@@ -9,11 +9,23 @@
   border-radius: 5px;
   height:  80px;
   width: 250px;
-  color: black;
-  background: aqua;
+  color: white;
+  font-family: Cambria;
+  font-size: large;
+  font-weight: bold;
+  background: #012b26;
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0.6;
+}
+
+.button:hover {
+  border-color: #4bff08;
+  border-width: 12px;
+  border-radius: 10px;
 }

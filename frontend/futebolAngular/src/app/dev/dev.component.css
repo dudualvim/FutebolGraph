@@ -1,5 +1,5 @@
 * {
-  background-color: #90ee90;
+  background-color: #2F4F4F;
 }
 
 .button{
@@ -7,11 +7,20 @@
   border-radius: 5px;
   height:  80px;
   width: 250px;
-  color: black;
-  background: #00FFFF;
+  color: white;
+  background: #012b26;
   align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+
+.button:hover {
+  border-color: #4bff08;
+  border-width: 12px;
+  border-radius: 10px;
 }
