@@ -69,8 +69,24 @@ export class FutebolComponent implements OnInit{
     let p1 = matches.substring(0, index);
     let p2 = matches.substring(index+1);
 
-    console.log(p1);
-    console.log(p2);
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const linearGradient = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
+    linearGradient.setAttribute('id', 'gradient');
+    linearGradient.setAttribute('x1', '0%');
+    linearGradient.setAttribute('y1', '100%');
+    linearGradient.setAttribute('x2', '0%');
+    linearGradient.setAttribute('y2', '0%');
+
+    const stop1 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+    const stop2 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', '#00b824');
+    stop2.setAttribute('offset', '100%');
+    stop2.setAttribute('stop-color', '#007940');
+    linearGradient.appendChild(stop1);
+    linearGradient.appendChild(stop2);
+    defs.appendChild(linearGradient);
+    svg.appendChild(defs);
 
     for (let i = 0; i < 11; i++) {
       for (let j = 0; j < 10; j++) {
@@ -79,7 +95,9 @@ export class FutebolComponent implements OnInit{
         line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
         line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
         line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
-        line.setAttribute('style', 'stroke:rgb(255,0,0); stroke-width:2');
+        line.setAttribute('stroke', 'url(#gradient)');
+        line.setAttribute('stroke-width', '5');
+        line.setAttribute('style', 'filter: drop-shadow(0px 0px 4px rgb(80, 141, 44)');
         svg.appendChild(line);
         document.getElementById('drop-list').appendChild(svg);
       }

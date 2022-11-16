@@ -2,8 +2,11 @@ import sys
 from heapq import heapify, heappush
 from random import randint
 
+x = 0
 class Grafo:
+
     def dijsktra(self, grafo, origem, dest):
+        global x
         inf = sys.maxsize
         grafo_aux = {'Alisson': {'custo': inf, 'pred': [], 'forca': randint(50, 500)}, # Custo = Distância
                      'Danilo': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
@@ -20,16 +23,15 @@ class Grafo:
         grafo_aux[origem]['custo'] = 0
         visitado = []
         temp = origem
-        for i in range(10):
+        for i in range(0, len(grafo)-1):
             if temp not in visitado:
                 visitado.append(temp)
                 min_heap = []
                 for j in grafo[temp]:
                     if j not in visitado:
                         custo = grafo_aux[temp]['custo'] + grafo[temp][j]
-                        if custo < grafo_aux[j]['custo']:
-                            grafo_aux[j]['custo'] = custo
-                            grafo_aux[j]['pred'] = grafo_aux[temp]['pred'] + [temp]
+                        grafo_aux[j]['custo'] = custo
+                        grafo_aux[j]['pred'] = grafo_aux[temp]['pred'] + [temp]
                         heappush(min_heap, (grafo_aux[j]['custo'], j))
             heapify(min_heap)
             temp = min_heap[0][1]
@@ -37,6 +39,7 @@ class Grafo:
 
     # Função que insere uma nova aresta no grafo
     def addEdge(self, grafo, key, vert, dist, forca):
+
         if key not in grafo:
             grafo[key] = {}
         if vert not in grafo:
@@ -44,6 +47,10 @@ class Grafo:
 
         grafo[key][vert] = dist
         grafo[vert][key] = dist
+
+
+
+
 #
 #
 # Jogadores = ['Alisson', 'Thiago Silva', 'Marquinhos', 'Danilo', 'Militão',

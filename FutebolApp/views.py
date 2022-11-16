@@ -62,22 +62,21 @@ def printDict(dictObj):
 def dijkstra(jogadores_serializer):
     g = {}
     gr = Grafo()
-    i = 0
-    j = 1
-    for i in range(11):
-        for j in range(10):
+    for i in range(0, len(jogadores_serializer.data)):
+        for j in range(1, len(jogadores_serializer.data)-1):
             if jogadores_serializer.data[i] != jogadores_serializer.data[j]:
                 x = [jogadores_serializer.data[i]['JogadorX'], jogadores_serializer.data[i]['JogadorY']]
                 y = [jogadores_serializer.data[j]['JogadorX'], jogadores_serializer.data[j]['JogadorY']]
                 gr.addEdge(g, jogadores_serializer.data[i]['JogadorNome'], jogadores_serializer.data[j]['JogadorNome'],
                                   int(math.dist(x, y)), jogadores_serializer.data[i]['JogadorForca'])
+                print(len(g))
 
     # Mostra a matriz de distâncias no terminal
     df = pd.DataFrame(g)
     df.fillna(0, inplace=True)
 
     # Mostra a matriz como uma tabela HTML
-    html = df.to_html()
+    html = df.to_html(classes = 'table', justify = 'center')
 
     source = 'Alisson'
     destination = 'Neymar'
