@@ -22,6 +22,7 @@ class Grafo:
                      }
         grafo_aux[origem]['custo'] = 0
         visitado = []
+
         temp = origem
         for i in range(0, len(grafo)-1):
             if temp not in visitado:
@@ -30,23 +31,34 @@ class Grafo:
                 for j in grafo[temp]:
                     if j not in visitado:
                         custo = grafo_aux[temp]['custo'] + grafo[temp][j]
-                        grafo_aux[j]['custo'] = custo
-                        grafo_aux[j]['pred'] = grafo_aux[temp]['pred'] + [temp]
+                        if custo < grafo_aux[j]['custo']:
+                            grafo_aux[j]['custo'] = custo
+                            grafo_aux[j]['pred'] = grafo_aux[temp]['pred'] + [temp]
                         heappush(min_heap, (grafo_aux[j]['custo'], j))
             heapify(min_heap)
             temp = min_heap[0][1]
         return ("Menor Caminho: " + str(grafo_aux[dest]['pred'] + [dest])), ("Menor distância: " + str(grafo_aux[dest]['custo']))
 
-    # Função que insere uma nova aresta no grafo
-    def addEdge(self, grafo, key, vert, dist, forca):
+    """
+        Função que insere uma nova aresta no grafo
+        grafo: grafo com os jogadores
+        a: primeiro vértice
+        b: segundo vértice
+        dist: distância
+        forca: número aleatório   
+    """
+    def addEdge(self, grafo, a, b, dist, forca):
 
-        if key not in grafo:
-            grafo[key] = {}
-        if vert not in grafo:
-            grafo[vert] = {}
+        if a not in grafo:
+            grafo[a] = {}
+        if b not in grafo:
+            grafo[b] = {}
 
-        grafo[key][vert] = dist
-        grafo[vert][key] = dist
+        # weight = (dist - 50)/410
+
+        if forca >= dist:
+            grafo[a][b] = dist
+            grafo[b][a] = dist
 
 
 
@@ -66,8 +78,8 @@ class Grafo:
 #
 # # Mostra a lista de adjacências no terminal
 # print('Lista de Adjacências')
-# for vert, adj in g.items():
-#     print(f'{vert} {adj}')
+# for b, adj in g.items():
+#     print(f'{b} {adj}')
 #
 # # Mostra a matriz de distâncias no terminal
 # df = pd.DataFrame(g)
