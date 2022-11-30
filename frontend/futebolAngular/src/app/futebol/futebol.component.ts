@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { moveItemInArray } from "@angular/cdk/drag-drop";
 import { SharedService } from "../shared.service";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-futebol',
@@ -56,18 +57,12 @@ export class FutebolComponent implements OnInit{
     const svg = document.createElementNS('http://www.w3.org/2000/svg' ,'svg');
     svg.setAttribute('width', '1470');
     svg.setAttribute('height', '800');
+    const teste = Array.from(document.getElementsByTagName('p'));
 
-    var matches;
-
-    var pattern = /\[(.*?)\]/g;
-    var match;
-    while ((match = pattern.exec(t1)) != null){
-      matches = match[1];
+    const arr = [];
+    for (const i in teste){
+      arr.push($(teste[i]).text());
     }
-
-    let index = matches.indexOf(',');
-    let p1 = matches.substring(0, index);
-    let p2 = matches.substring(index+1);
 
     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     const linearGradient = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
@@ -88,18 +83,25 @@ export class FutebolComponent implements OnInit{
     defs.appendChild(linearGradient);
     svg.appendChild(defs);
 
-    for (let i = 0; i < 11; i++) {
-      for (let j = 0; j < 10; j++) {
-        const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
-        line.setAttribute('x1', this.arrayJogadores[i]['JogadorX']); // X inicial
-        line.setAttribute('y1', this.arrayJogadores[i]['JogadorY']); // Y Inicial
-        line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
-        line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
-        line.setAttribute('stroke', 'url(#gradient)');
-        line.setAttribute('stroke-width', '5');
-        line.setAttribute('style', 'filter: drop-shadow(0px 0px 4px rgb(80, 141, 44)');
-        svg.appendChild(line);
-        document.getElementById('drop-list').appendChild(svg);
+    for (let i = 0; i < arr.length; i++) {
+      const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
+      for (let j = 0; j < 11; j++) {
+        if (arr[i] === this.arrayJogadores[j]['JogadorNome']) {
+          line.setAttribute('x1', this.arrayJogadores[j]['JogadorX']); // X inicial
+          line.setAttribute('y1', this.arrayJogadores[j]['JogadorY']); // Y Inicial
+        }
+      }
+
+      for (let j = 0; j < 11; j++) {
+        if (arr[i + 1] === this.arrayJogadores[j]['JogadorNome']) {
+          line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
+          line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
+          line.setAttribute('stroke', 'url(#gradient)');
+          line.setAttribute('stroke-width', '10');
+          line.setAttribute('style', 'filter: drop-shadow(0px 0px 4px rgb(80, 141, 44)');
+          svg.appendChild(line);
+          document.getElementById('drop-list').appendChild(svg);
+        }
       }
     }
   }
@@ -114,8 +116,8 @@ export class FutebolComponent implements OnInit{
   atualizarPosicao(data: any, x: number, y: number) {
     for (let i in this.jogadores) {
       if (this.jogadores[i] === data) {
-        this.jogadores[i]["JogadorX"] = x;
-        this.jogadores[i]["JogadorY"] = y;
+        this.jogadores[i]["JogadorX"] = +x;
+        this.jogadores[i]["JogadorY"] = +y;
       }
     }
   }
@@ -127,9 +129,8 @@ export class FutebolComponent implements OnInit{
   moved(event) {
     this._pointerPosition = event.pointerPosition;
     this.position = `Posição X: ${this._pointerPosition.x} - Y: ${this._pointerPosition.y}`;
-    this.atualizarPosicao(event.source.data, this._pointerPosition.x, this._pointerPosition.y);
+    this.atualizarPosicao(event.source.data, parseInt(this._pointerPosition.x), parseInt(this._pointerPosition.y));
   }
-
 
   /*
     Responsável por persistir os itens dentro do campo de futebol.
@@ -151,7 +152,6 @@ export class FutebolComponent implements OnInit{
       this.addField({ ...event.item.data }, event.currentIndex);
       this.jogadores = this.jogadores.filter(jogador => jogador.JogadorId != event.item.data.JogadorId)
     }
-    // console.warn(this.arrayJogadores);
   }
 
   /*
@@ -168,7 +168,6 @@ export class FutebolComponent implements OnInit{
   jogadorSelecionado = null;
   MostrarJogador(item){
     this.jogadorSelecionado = item;
-    console.log(this.jogadorSelecionado);
   }
 
   NaoMostrarJogador(){

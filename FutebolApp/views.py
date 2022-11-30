@@ -1,6 +1,6 @@
 import math
 import pandas as pd
-import matplotlib.pyplot as plt
+import js2py as js
 import networkx.algorithms.approximation as nx_app
 
 from django.shortcuts import render
@@ -59,6 +59,62 @@ def printDict(dictObj):
       my_list.insert(0, f'{vert} {adj} <br>')
       i += 1
     return my_list
+
+def makeEdges(resultado, jogadores_serializer):
+    makeSVG = js.eval_js("""
+        function desenharAresta(x, y, number) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg' ,'svg');
+            svg.setAttribute('width', '1470');
+            svg.setAttribute('height', '800');
+        
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const linearGradient = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
+            linearGradient.setAttribute('id', 'gradient');
+            linearGradient.setAttribute('x1', '0%');
+            linearGradient.setAttribute('y1', '100%');
+            linearGradient.setAttribute('x2', '0%');
+            linearGradient.setAttribute('y2', '0%');
+        
+            const stop1 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+            const stop2 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
+            stop1.setAttribute('offset', '0%');
+            stop1.setAttribute('stop-color', '#00b824');
+            stop2.setAttribute('offset', '100%');
+            stop2.setAttribute('stop-color', '#007940');
+            linearGradient.appendChild(stop1);
+            linearGradient.appendChild(stop2);
+            defs.appendChild(linearGradient);
+            svg.appendChild(defs);   
+            
+            for (let j = 0; j < number; j++) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
+                line.setAttribute('x1', x[j]); // X inicial
+                line.setAttribute('y1', y[j]); // Y Inicial
+                line.setAttribute('x2', x[j]); // X Final
+                line.setAttribute('y2', y[j]); // Y Final
+                line.setAttribute('stroke', 'url(#gradient)');
+                line.setAttribute('stroke-width', '5');
+                line.setAttribute('style', 'filter: drop-shadow(0px 0px 4px rgb(80, 141, 44)');
+                svg.appendChild(line);
+                document.getElementById('drop-list').appendChild(svg);
+              }        
+        }
+        """)
+
+    x = []
+    y = []
+
+    for i in resultado:
+        for j in range(10):
+            if i == jogadores_serializer.data[j]['JogadorNome']:
+                x.append(jogadores_serializer.data[j]['JogadorX'])
+                y.append(jogadores_serializer.data[j]['JogadorY'])
+
+    print(len(y))
+    return str('<script>' + makeSVG(x, y, len(y)) + '</script>')
+
+
+
 def dijkstra(jogadores_serializer):
     g = {}
     gr = Grafo()

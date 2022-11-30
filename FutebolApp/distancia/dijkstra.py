@@ -22,7 +22,6 @@ class Grafo:
                      }
         grafo_aux[origem]['custo'] = 0
         visitado = []
-
         temp = origem
         for i in range(0, len(grafo)-1):
             if temp not in visitado:
@@ -37,7 +36,13 @@ class Grafo:
                         heappush(min_heap, (grafo_aux[j]['custo'], j))
             heapify(min_heap)
             temp = min_heap[0][1]
-        return ("Menor Caminho: " + str(grafo_aux[dest]['pred'] + [dest])), ("Menor distância: " + str(grafo_aux[dest]['custo']))
+        jogadores = []
+        for i in grafo_aux[dest]['pred']:
+            jogadores.append('<p>' + i + '</p>')
+        jogadores.append('<p>' + dest + '</p>')
+        jogadores.append('<pre>' + str(grafo_aux[dest]['custo']) + '</pre>')
+        # return ("Menor Caminho: " + str(grafo_aux[dest]['pred'] + [dest])), ("Menor distância: " + str(grafo_aux[dest]['custo']))
+        return jogadores
 
     """
         Função que insere uma nova aresta no grafo

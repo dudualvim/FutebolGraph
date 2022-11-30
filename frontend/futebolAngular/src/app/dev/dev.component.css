@@ -1,5 +1,13 @@
 * {
-  background-color: #2F4F4F;
+  background-color: #0b1f20;
+  color: white;
+}
+
+img {
+  border-style: solid;
+  border-width: 5px;
+  border-color: white;
+  border-radius: 20px;
 }
 
 .button{
@@ -16,7 +24,6 @@
   text-align: center;
   cursor: pointer;
   transition: 0.3s;
-
 }
 
 .button:hover {

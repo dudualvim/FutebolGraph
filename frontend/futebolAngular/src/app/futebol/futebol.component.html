@@ -1,6 +1,6 @@
 <div class="container-fluid h-100 w-100">
   <!-- Campo de Futebol (Destino) -->
-  <div class="col d-flex  teste">
+  <div class="col d-flex teste">
     <div class="col-10">
       <h2 class="text-center" style="margin-right: 14px">Campo</h2>
       <h4 class="text-center">{{position}}</h4>
@@ -51,13 +51,17 @@
     <div class="col-9">
       <!-- Lista de Jogadores (Origem) -->
       <h2 class="text-center" style="margin-left: 160px">Jogadores Disponíveis</h2>
-      <div class="row d-flex justify-content-center flex-row rounded py-1" style="margin-left: 155px"   >
+      <div class="row d-flex justify-content-center flex-row rounded py-1" style="margin-left: 155px; "   >
         <div
-          class="row-10 d-flex justify-content-center flex-row rounded"
+          class="row-10 d-flex justify-content-center flex-row "
           cdkDropList
           #lista="cdkDropList"
           [cdkDropListConnectedTo]="campo"
-          style="margin-right: 10px; justify-content: center;"
+          style="margin-right: 10px; justify-content: center;
+background-color: #012b26; border-style: solid;
+  border-width: 10px;
+  border-color: #012b26;
+  border-radius: 20px;"
         >
           <div
             cdkDrag
@@ -69,7 +73,6 @@
             style="background-image: url('../../assets/Images/jogador{{item.JogadorId}}.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat; "
             class="circleBase type2 m-1 mx-auto"
           >
-
           </div>
         </div>
       </div>

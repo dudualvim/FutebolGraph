@@ -1,0 +1,32 @@
+body {
+  background-color: #0b1f20;
+}
+
+img {
+  border-style: solid;
+  border-width: 5px;
+  border-color: white;
+  border-radius: 20px;
+}
+
+.button{
+  border-color: white;
+  border-radius: 5px;
+  height:  80px;
+  width: 250px;
+  color: white;
+  background: #012b26;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  border-color: #4bff08;
+  border-width: 12px;
+  border-radius: 10px;
+}

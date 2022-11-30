@@ -15,6 +15,7 @@ import { JogadorFormComponent } from './jogador-form/jogador-form.component';
 import { TesteFutebolComponent } from './teste-futebol/teste-futebol.component';
 import { HomeComponent } from './home/home.component';
 import { DevComponent } from './dev/dev.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DevComponent } from './dev/dev.component';
     JogadorFormComponent,
     TesteFutebolComponent,
     HomeComponent,
-    DevComponent
+    DevComponent,
+    TutorialComponent
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]
