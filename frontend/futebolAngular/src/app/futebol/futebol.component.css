@@ -3,6 +3,15 @@
     color: white;
 }
 
+h2 {
+
+}
+
+pre {
+  font-size: 10px;
+  color: #FFF;
+}
+
 .button {
   border-color: white;
   border-radius: 5px;
@@ -54,16 +63,26 @@
   width: 77px;
   height: 77px;
   background: black;
-  border: solid 1px #ccc;
+  border: solid 1px #FFF;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  cursor: move;
-  font-size: 14px;
   border-radius: 50%;
+}
 
+.type3 {
+  width: 77px;
+  height: 77px;
+  border: solid 5px #00b824;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-radius: 50%;
+  box-shadow: 5px 5px 8px #00b824, 10px 10px 8px #012b26;
 }
 
 .cdk-drag-placeholder {

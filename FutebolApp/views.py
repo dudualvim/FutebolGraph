@@ -42,78 +42,15 @@ def futebolApi(request):
         jogadores.delete()
         return JsonResponse("Deletado com sucesso", safe=False)
 
-def printItems(dictObj, indent):
-    print('  '*indent + '<ul>')
-    for k,v in dictObj.items():
-        if isinstance(v, dict):
-            print( '  '*indent , '<li>', k, ':', '</li>')
-            printItems(v, indent+1)
-        else:
-            print( ' '*indent , '<li>', k, ':', v, '</li>')
-    print( '  '*indent + '</ul>')
-
 def printDict(dictObj):
     my_list = []
     i = 0
     for vert, adj in dictObj.items():
-      my_list.insert(0, f'{vert} {adj} <br>')
+      my_list.insert(i, f'<li class="list-group-item bg-dark"> <b>{vert}</b> {adj} </li>')
       i += 1
-    return my_list
 
-def makeEdges(resultado, jogadores_serializer):
-    makeSVG = js.eval_js("""
-        function desenharAresta(x, y, number) {
-            const svg = document.createElementNS('http://www.w3.org/2000/svg' ,'svg');
-            svg.setAttribute('width', '1470');
-            svg.setAttribute('height', '800');
-        
-            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-            const linearGradient = document.createElementNS("http://www.w3.org/2000/svg", 'linearGradient');
-            linearGradient.setAttribute('id', 'gradient');
-            linearGradient.setAttribute('x1', '0%');
-            linearGradient.setAttribute('y1', '100%');
-            linearGradient.setAttribute('x2', '0%');
-            linearGradient.setAttribute('y2', '0%');
-        
-            const stop1 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-            const stop2 = document.createElementNS("http://www.w3.org/2000/svg", 'stop');
-            stop1.setAttribute('offset', '0%');
-            stop1.setAttribute('stop-color', '#00b824');
-            stop2.setAttribute('offset', '100%');
-            stop2.setAttribute('stop-color', '#007940');
-            linearGradient.appendChild(stop1);
-            linearGradient.appendChild(stop2);
-            defs.appendChild(linearGradient);
-            svg.appendChild(defs);   
-            
-            for (let j = 0; j < number; j++) {
-                const line = document.createElementNS('http://www.w3.org/2000/svg' , 'line');
-                line.setAttribute('x1', x[j]); // X inicial
-                line.setAttribute('y1', y[j]); // Y Inicial
-                line.setAttribute('x2', x[j]); // X Final
-                line.setAttribute('y2', y[j]); // Y Final
-                line.setAttribute('stroke', 'url(#gradient)');
-                line.setAttribute('stroke-width', '5');
-                line.setAttribute('style', 'filter: drop-shadow(0px 0px 4px rgb(80, 141, 44)');
-                svg.appendChild(line);
-                document.getElementById('drop-list').appendChild(svg);
-              }        
-        }
-        """)
-
-    x = []
-    y = []
-
-    for i in resultado:
-        for j in range(10):
-            if i == jogadores_serializer.data[j]['JogadorNome']:
-                x.append(jogadores_serializer.data[j]['JogadorX'])
-                y.append(jogadores_serializer.data[j]['JogadorY'])
-
-    print(len(y))
-    return str('<script>' + makeSVG(x, y, len(y)) + '</script>')
-
-
+    s = ''.join(str(x) for x in my_list)
+    return str(s)
 
 def dijkstra(jogadores_serializer):
     g = {}
@@ -125,16 +62,15 @@ def dijkstra(jogadores_serializer):
                 y = [jogadores_serializer.data[j]['JogadorX'], jogadores_serializer.data[j]['JogadorY']]
                 gr.addEdge(g, jogadores_serializer.data[i]['JogadorNome'], jogadores_serializer.data[j]['JogadorNome'],
                                   int(math.dist(x, y)), jogadores_serializer.data[i]['JogadorForca'])
-                print(len(g))
 
     # Mostra a matriz de distâncias no terminal
     df = pd.DataFrame(g)
     df.fillna(0, inplace=True)
 
     # Mostra a matriz como uma tabela HTML
-    html = df.to_html(classes = 'table', justify = 'center')
+    html = df.to_html(classes = ['table', 'table-dark', 'table-hover', 'table-striped'], justify = 'center')
 
     source = 'Alisson'
     destination = 'Neymar'
     resultado = gr.dijsktra(g, source, destination)
-    return html, printDict(g), resultado
+    return html, str('<h2>Lista de Adjacências</h2> <ul class="list-group">' + printDict(g) + '</ul>'), resultado

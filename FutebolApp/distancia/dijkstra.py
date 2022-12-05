@@ -1,12 +1,9 @@
 import sys
 from heapq import heapify, heappush
-from random import randint
-
-x = 0
+from random import randint, choice
+from operator import add, sub
 class Grafo:
-
     def dijsktra(self, grafo, origem, dest):
-        global x
         inf = sys.maxsize
         grafo_aux = {'Alisson': {'custo': inf, 'pred': [], 'forca': randint(50, 500)}, # Custo = Distância
                      'Danilo': {'custo': inf, 'pred': [], 'forca': randint(50, 500)},
@@ -37,12 +34,12 @@ class Grafo:
             heapify(min_heap)
             temp = min_heap[0][1]
         jogadores = []
+        jogadores.append('<h2>Resultado</h2>')
         for i in grafo_aux[dest]['pred']:
-            jogadores.append('<p>' + i + '</p>')
-        jogadores.append('<p>' + dest + '</p>')
-        jogadores.append('<pre>' + str(grafo_aux[dest]['custo']) + '</pre>')
-        # return ("Menor Caminho: " + str(grafo_aux[dest]['pred'] + [dest])), ("Menor distância: " + str(grafo_aux[dest]['custo']))
-        return jogadores
+            jogadores.append('<a type="button" class="btn btn-dark btn-lg">' + i + '</a>')
+            jogadores.append('<button type="button" class="btn btn-light btn-lg"> -> </button>')
+        jogadores.append('<a type="button" class="btn btn-dark btn-lg">' + dest + '</a>')
+        return jogadores, str('<br><br><button type="button" class="btn btn-success btn-lg"> Menor distância: ' + str(grafo_aux[dest]['custo']) + ' </button> ')
 
     """
         Função que insere uma nova aresta no grafo
@@ -59,42 +56,17 @@ class Grafo:
         if b not in grafo:
             grafo[b] = {}
 
-        # weight = (dist - 50)/410
+        ops = (add, sub)
+        op = choice(ops)
 
-        if forca >= dist:
-            grafo[a][b] = dist
-            grafo[b][a] = dist
+        pesoBola = 0.41
+        velocidadeVento = randint(-7, 7)
+        atritoGramado = randint(-5, 5)
 
+        distanciaBola = dist * pesoBola
+        ventoAtrito = op(velocidadeVento, atritoGramado)
+        pesoFinal = op(distanciaBola, ventoAtrito)
 
-
-
-#
-#
-# Jogadores = ['Alisson', 'Thiago Silva', 'Marquinhos', 'Danilo', 'Militão',
-#              'Coutinho', 'Paquetá', 'B. Guimarães', 'Richarlison', 'Vini Jr.', 'Neymar']
-#
-# g = {}
-# gr = Grafo()
-# # Preenche automaticamente o grafo
-# for i in range(11):
-#     for j in range(10):
-#         if Jogadores[i] != Jogadores[j]:
-#             gr.addEdge(g, Jogadores[i], Jogadores[j], randint(0, 100))
-#
-# # Mostra a lista de adjacências no terminal
-# print('Lista de Adjacências')
-# for b, adj in g.items():
-#     print(f'{b} {adj}')
-#
-# # Mostra a matriz de distâncias no terminal
-# df = pd.DataFrame(g)
-# df.fillna(0, inplace=True)
-# print(df.iloc[::-1])
-#
-# # Mostra a matriz como uma tabela HTML
-# html = df.to_html()
-# print(html)
-#
-# source = 'Alisson'
-# destination = 'Neymar'
-# gr.dijsktra(g, source, destination)
+        if forca >= pesoFinal:
+            grafo[a][b] = int(pesoFinal)
+            grafo[b][a] = int(pesoFinal)

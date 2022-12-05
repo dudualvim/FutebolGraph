@@ -14,17 +14,17 @@ export class FutebolComponent implements OnInit{
   arrayJogadores: any[] = [];
 
   jogadores = [
-    {"JogadorId": 1, "JogadorNome": 'Alisson',"JogadorForca": this.randomIntFromInterval(300,700), "JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 2, "JogadorNome": 'Danilo', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 3, "JogadorNome": 'Thiago Silva', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 4, "JogadorNome": 'Marquinhos', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 5, "JogadorNome": 'Casemiro', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 6, "JogadorNome": 'Alexandro', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 7, "JogadorNome": 'Raphinha', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 8, "JogadorNome": 'Paquetá', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 9, "JogadorNome": 'Richarlison', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 10, "JogadorNome": 'Neymar', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
-    {"JogadorId": 11, "JogadorNome": 'Vini Jr.', "JogadorForca": this.randomIntFromInterval(300,700),"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 1, "JogadorNome": 'Alisson',"JogadorForca": 152, "JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 2, "JogadorNome": 'Danilo', "JogadorForca": 251,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 3, "JogadorNome": 'Thiago Silva', "JogadorForca": 230,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 4, "JogadorNome": 'Marquinhos', "JogadorForca": 247,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 5, "JogadorNome": 'Casemiro', "JogadorForca": 315,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 6, "JogadorNome": 'Alexandro', "JogadorForca": 231,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 7, "JogadorNome": 'Raphinha', "JogadorForca": 452,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 8, "JogadorNome": 'Paquetá', "JogadorForca": 102,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 9, "JogadorNome": 'Richarlison', "JogadorForca": 214,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 10, "JogadorNome": 'Neymar', "JogadorForca": 354,"JogadorX": 0, "JogadorY": 0},
+    {"JogadorId": 11, "JogadorNome": 'Vini Jr.', "JogadorForca": 374,"JogadorX": 0, "JogadorY": 0},
   ];
 
   keys = ['JogadorNome', 'JogadorForca', 'JogadorX', 'JogadorY'];
@@ -37,31 +37,27 @@ export class FutebolComponent implements OnInit{
 
   ngOnInit(): void { }
 
-  randomIntFromInterval(min: number, max: number) { // min and max included
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   /*
     Função responsável por realizar uma requisição POST
     (botão de enviar)
   */
   Submit() {
     this.service.addJogador((this.arrayJogadores)).subscribe(res => {
-      let t1 = res.toString();
-      document.getElementById("resultDiv").innerHTML = t1;
-      this.desenharAresta(t1);
+      let resultado = res.toString();
+      document.getElementById("resultDiv").innerHTML = resultado;
+      this.desenharAresta(resultado);
     });
   }
 
-  desenharAresta(t1: string) {
+  desenharAresta(resultado: string) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg' ,'svg');
     svg.setAttribute('width', '1470');
     svg.setAttribute('height', '800');
-    const teste = Array.from(document.getElementsByTagName('p'));
+    const resultadoJogadores = Array.from(document.getElementsByTagName('a'));
 
     const arr = [];
-    for (const i in teste){
-      arr.push($(teste[i]).text());
+    for (const i in resultadoJogadores){
+      arr.push($(resultadoJogadores[i]).text());
     }
 
     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
@@ -89,6 +85,8 @@ export class FutebolComponent implements OnInit{
         if (arr[i] === this.arrayJogadores[j]['JogadorNome']) {
           line.setAttribute('x1', this.arrayJogadores[j]['JogadorX']); // X inicial
           line.setAttribute('y1', this.arrayJogadores[j]['JogadorY']); // Y Inicial
+          document.getElementById('jogador'+ this.arrayJogadores[j]['JogadorId']).classList.remove('type2');
+          document.getElementById('jogador'+ this.arrayJogadores[j]['JogadorId']).classList.add('type3');
         }
       }
 
@@ -96,6 +94,8 @@ export class FutebolComponent implements OnInit{
         if (arr[i + 1] === this.arrayJogadores[j]['JogadorNome']) {
           line.setAttribute('x2', this.arrayJogadores[j]['JogadorX']); // X Final
           line.setAttribute('y2', this.arrayJogadores[j]['JogadorY']); // Y Final
+          document.getElementById('jogador'+ this.arrayJogadores[j]['JogadorId']).classList.remove('type2');
+          document.getElementById('jogador'+ this.arrayJogadores[j]['JogadorId']).classList.add('type3');
           line.setAttribute('stroke', 'url(#gradient)');
           line.setAttribute('stroke-width', '10');
           line.setAttribute('style', 'filter: drop-shadow(0px 0px 4px rgb(80, 141, 44)');
@@ -164,15 +164,9 @@ export class FutebolComponent implements OnInit{
   /*
     Função responsável por mostrar as informações dos jogadores para o usuário de acordo com o mouse.
   */
-
   jogadorSelecionado = null;
   MostrarJogador(item){
     this.jogadorSelecionado = item;
   }
-
-  NaoMostrarJogador(){
-    this.jogadorSelecionado = null;
-  }
-
 }
 
